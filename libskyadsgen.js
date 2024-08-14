@@ -128,7 +128,7 @@ const handleApiResponse = async () => {
     // const adContent = data.content; // Assume API returns { content: '...' }
     console.log("adasd");
     modal.open(`
-        <video src="./video.mp4" autoplay muted=false>
+        <video src="https://videos.pexels.com/video-files/27099933/12071850_2560_1440_24fps.mp4" autoplay muted=false>
           Your browser does not support the video tag.
         </video>
       `);

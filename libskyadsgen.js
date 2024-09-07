@@ -1,8 +1,7 @@
 (function () {
 	// Utility function to generate a random hash-like string
 	const generateHash = (length) => {
-		const chars =
-			"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 		let result = "";
 		for (let i = 0; i < length; i++) {
 			result += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -19,96 +18,94 @@
 
 	// Create and style the modal container
 	const createModal = () => {
-		// Create a style element and add CSS rules
 		const style = document.createElement("style");
 		style.textContent = `
-	.${modalClass} {
-		display: none;
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: transparent;
-		justify-content: center;
-		align-items: center;
-		z-index: 1000;
-	}
+		.${modalClass} {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: transparent;
+			justify-content: center;
+			align-items: center;
+			z-index: 1000;
+		}
 
-	.${modalContentClass} {
-		background: #000;
-		padding: 0;
-		width: 100%;
-		height: 100%;
-		box-sizing: border-box;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		overflow: hidden;
-		flex-direction: column;
-		position: relative;
-	}
+		.${modalContentClass} {
+			background: #000;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+			box-sizing: border-box;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+			flex-direction: column;
+			position: relative;
+		}
 
-	.${closeButtonClass} {
-		text-shadow: 0 0 3px #000;
-		font-weight: bold;
-		position: fixed;
-		top: 20px;
-		right: 20px;
-		font-size: 35px;
-		color: white;
-		z-index: 1001;
-		border-radius: 50%;
-	}
+		.${closeButtonClass} {
+			text-shadow: 0 0 3px #000;
+			font-weight: bold;
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			font-size: 35px;
+			color: white;
+			z-index: 1001;
+			border-radius: 50%;
+		}
 
-	.countdown {
-		text-shadow: 0 0 3px #000;
-		position: fixed;
-		top: 20px;
-		right: 20px;
-		font-size: 20px;
-		color: white;
-		z-index: 1001;
-	}
+		.countdown {
+			text-shadow: 0 0 3px #000;
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			font-size: 20px;
+			color: white;
+			z-index: 1001;
+		}
 
-	.${modalContentClass} video {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		flex-grow: 1;
-	}
+		.${modalContentClass} video {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			flex-grow: 1;
+		}
 
-	.modal-footer {
-		background-color: #fff;
-		width: 100%;
-		text-align: center;
-		padding: 10px;
-		color: #000;
-		font-size: 14px;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-	}
+		.modal-footer {
+			background-color: #fff;
+			width: 100%;
+			text-align: center;
+			padding: 10px;
+			color: #000;
+			font-size: 14px;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+		}
 
-	.slideshow-container {
-		position: relative;
-		width: 100%;
-		height: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color: black;
-	}
+		.slideshow-container {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: black;
+		}
 
-	.slideshow-container img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-        `;
+		.slideshow-container img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+		`;
 		document.head.appendChild(style);
 
-		// Create the modal and its content
 		const modal = document.createElement("div");
 		modal.id = modalId;
 		modal.className = modalClass;
@@ -146,11 +143,11 @@
 				open: (modalContent, seconds) => {
 					content.innerHTML = modalContent;
 					modal.style.display = "flex";
-					let countdownValue = seconds; // Countdown from specified seconds
+					let countdownValue = seconds;
 
 					countdown.textContent = `${countdownValue}s`;
 					countdown.style.display = "block";
-					closeButton.style.display = "none"; // Ensure close button is hidden at the start
+					closeButton.style.display = "none";
 
 					const countdownInterval = setInterval(() => {
 						countdownValue -= 1;
@@ -165,8 +162,8 @@
 				},
 				close: () => {
 					modal.style.display = "none";
-					countdown.style.display = "none"; // Ensure countdown is hidden when modal is closed
-					closeButton.style.display = "none"; // Reset close button display state
+					countdown.style.display = "none";
+					closeButton.style.display = "none";
 				},
 			},
 			content,
@@ -187,28 +184,25 @@
 	}
 
 	function createSlideShowAdsContainer(imageUrls) {
-		console.log(imageUrls);
 		return `
- <div class="slideshow-container">
-					${imageUrls
-						.map(
-							(src, index) =>
-								`<img class="slide" src="${src}" style="display: ${
-									index === 0 ? "block" : "none"
-								};">`
-						)
-						.join("")}
+	 <div class="slideshow-container">
+						${imageUrls
+							.map(
+								(src, index) =>
+									`<img class="slide" src="${src}" style="display: ${
+										index === 0 ? "block" : "none"
+									};">`
+							)
+							.join("")}
 				</div>
 `;
 	}
 
 	// Function to handle API response and open the modal
-	const handleApiResponse = async () => {
+	const showAdvertisement = async (adContent) => {
 		try {
 			// Get the key from the script tag
-			const scriptTag = document.querySelector(
-				'script[data-name*="skyadsgen"]'
-			);
+			const scriptTag = document.querySelector('script[data-name*="skyadsgen"]');
 			const apiKey = scriptTag?.getAttribute("data-key");
 
 			if (!apiKey) {
@@ -216,25 +210,18 @@
 			}
 
 			// Replace with your API URL, including the API key
-			const response = await fetch(
-				`http://localhost:7575/api/cloud/cams/adsEngine?key=${apiKey}`
-			);
-			if (!response.ok) {
-				throw new Error("Network response was not ok");
-			}
-			const adContent = await response.json();
+			// const response = await fetch(`http://localhost:7575/api/cloud/cams/adsEngine?key=${apiKey}`);
+			// if (!response.ok) {
+			// 	console.log("Fetching API key failed");
+			// 	return;
+			// }
+			// const adContent = await response.json();
 
 			// Display the advertisements based on type
 			if (adContent.type === "video") {
-				modal.open(
-					createVideoAdsContainer(adContent.content),
-					adContent.duration
-				);
+				modal.open(createVideoAdsContainer(adContent.content), adContent.duration);
 			} else if (adContent.type === "image") {
-				modal.open(
-					createSlideShowAdsContainer(adContent.content),
-					adContent.duration
-				);
+				modal.open(createSlideShowAdsContainer(adContent.content), adContent.duration);
 
 				let slideIndex = 0;
 				const slides = document.querySelectorAll(".slide");
@@ -256,21 +243,21 @@
 	};
 
 	// Polling function to continuously request data from the API
-	const startPolling = (interval) => {
-		handleApiResponse(); // Initial call to fetch data
-		// Set interval to repeatedly fetch data
-		setInterval(() => {
-			handleApiResponse();
-		}, interval);
-	};
+	// const startPolling = (interval) => {
+	// 	showAdvertisement(); // Initial call to fetch data
+	// 	// Set interval to repeatedly fetch data
+	// 	setInterval(() => {
+	// 		showAdvertisement();
+	// 	}, interval);
+	// };
 
-	// Start polling every 15 seconds (15000 milliseconds)
-	startPolling(15000);
+	// // Start polling every 15 seconds (15000 milliseconds)
+	// startPolling(15000);
 
 	// Handle page visibility change
 	document.addEventListener("visibilitychange", () => {
 		if (document.visibilityState === "visible") {
-			handleApiResponse();
+			showAdvertisement();
 		}
 	});
 
@@ -278,4 +265,29 @@
 	closeButton.addEventListener("click", () => {
 		modal.close();
 	});
+	const scriptTag = document.querySelector('script[data-name*="skyadsgen"]');
+	const apiKey = scriptTag?.getAttribute("data-key");
+	const socket = new WebSocket(`ws://localhost:7575?key=${apiKey}`); // Replace with your WebSocket server URL
+
+	socket.onopen = () => {
+		console.log("Connected to the WebSocket server");
+	};
+
+	socket.onmessage = (event) => {
+		const adContent = JSON.parse(event.data);
+		console.log("Received new advertisement:", adContent);
+		showAdvertisement(adContent);
+	};
+
+	socket.onerror = (error) => {
+		console.error("WebSocket error:", error);
+	};
+
+	// Event listener for the close button
+	closeButton.addEventListener("click", () => {
+		modal.close();
+	});
+
+	// Expose the showAdvertisement function globally for manual triggering
+	window.showAdvertisementManually = showAdvertisement;
 })();

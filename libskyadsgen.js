@@ -77,11 +77,11 @@
 		}
 
 		.modal-footer {
-			background-color: #fff;
+			background-color: #000;
 			width: 100%;
 			text-align: center;
 			padding: 10px;
-			color: #000;
+			color: #fff;
 			font-size: 14px;
 			position: absolute;
 			bottom: 0;
@@ -209,14 +209,6 @@
 				throw new Error("API key is missing.");
 			}
 
-			// Replace with your API URL, including the API key
-			// const response = await fetch(`http://localhost:7575/api/cloud/cams/adsEngine?key=${apiKey}`);
-			// if (!response.ok) {
-			// 	console.log("Fetching API key failed");
-			// 	return;
-			// }
-			// const adContent = await response.json();
-
 			// Display the advertisements based on type
 			if (adContent.type === "video") {
 				modal.open(createVideoAdsContainer(adContent.content), adContent.duration);
@@ -268,6 +260,7 @@
 	const scriptTag = document.querySelector('script[data-name*="skyadsgen"]');
 	const apiKey = scriptTag?.getAttribute("data-key");
 	const socket = new WebSocket(`ws://localhost:7575?key=${apiKey}`); // Replace with your WebSocket server URL
+	// const socket = new WebSocket(`https://cams-api.cloudmateria.com?key=${apiKey}`); // Replace with your WebSocket server URL
 
 	socket.onopen = () => {
 		console.log("Connected to the WebSocket server");
@@ -276,6 +269,7 @@
 	socket.onmessage = (event) => {
 		const adContent = JSON.parse(event.data);
 		console.log("Received new advertisement:", adContent);
+		console.log(adContent);
 		showAdvertisement(adContent);
 	};
 

@@ -141,25 +141,41 @@
 			modal: {
 				element: modal,
 				open: (modalContent, seconds) => {
+					// Check if the ad has already been shown
+					const adShown = localStorage.getItem("adShown");
+
+					// Set the content
 					content.innerHTML = modalContent;
 					modal.style.display = "flex";
+
 					let countdownValue = seconds;
 
-					countdown.textContent = `${countdownValue}s`;
-					countdown.style.display = "block";
-					closeButton.style.display = "none";
-
-					const countdownInterval = setInterval(() => {
-						countdownValue -= 1;
+					if (!adShown) {
+						// Show the countdown if the ad hasn't been shown
 						countdown.textContent = `${countdownValue}s`;
+						countdown.style.display = "block";
+						closeButton.style.display = "none";
 
-						if (countdownValue <= 0) {
-							clearInterval(countdownInterval);
-							countdown.style.display = "none";
-							closeButton.style.display = "block";
-						}
-					}, 1000);
+						const countdownInterval = setInterval(() => {
+							countdownValue -= 1;
+							countdown.textContent = `${countdownValue}s`;
+
+							if (countdownValue <= 0) {
+								clearInterval(countdownInterval);
+								countdown.style.display = "none";
+								closeButton.style.display = "block";
+
+								// Mark the ad as shown
+								localStorage.setItem("adShown", "true");
+							}
+						}, 1000);
+					} else {
+						// Skip countdown if ad has already been shown
+						closeButton.style.display = "block";
+						countdown.style.display = "none";
+					}
 				},
+
 				close: () => {
 					modal.style.display = "none";
 					countdown.style.display = "none";
@@ -256,6 +272,7 @@
 	// Event listener for the close button
 	closeButton.addEventListener("click", () => {
 		modal.close();
+		localStorage.removeItem("adShown");
 	});
 	const scriptTag = document.querySelector('script[data-name*="skyadsgen"]');
 	const apiKey = scriptTag?.getAttribute("data-key");

@@ -1,0 +1,2 @@
+@echo off
+uglifyjs libskyadsgen.js -o libskyadsgen.min.js  --compress toplevel,sequences=false,unsafe,passes=2  --mangle toplevel,reserved=[]  -O beautify=false,quote_style=1,wrap_iife=true  --comments false
